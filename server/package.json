@@ -12,7 +12,8 @@
     "generate": "run-p generate:*",
     "generate:frourio": "frourio",
     "generate:prisma": "prisma generate",
-    "migrate:dev": "prisma migrate save --experimental && prisma migrate up --experimental",
+    "migrate": "prisma migrate",
+    "migrate:dev": "prisma migrate dev",
     "migrate:dev:createonly": "prisma migrate dev --create-only",
     "migrate:reset": "prisma migrate reset",
     "pm2:start": "pm2 start pm2.config.json --env production",
@@ -22,7 +23,7 @@
     "pm2:monit": "pm2 monit",
     "seed": "prisma db seed --preview-feature",
     "ts-node": "ts-node --compiler-options \"{\\\"module\\\":\\\"commonjs\\\"}\"",
-    "start": "npm run migrate:dev && cross-env NODE_ENV=production node index.js"
+    "start": "npm run migrate && cross-env NODE_ENV=production node index.js"
   },
   "dependencies": {
     "@google-cloud/storage": "^5.18.2",
