@@ -38,7 +38,10 @@ export const deleteBlancFile = async (idList: BlancFile['id'][]) => {
     })
     const storage = new Storage({
       projectId: process.env.PROJECT_ID,
-      keyFilename: process.env.GCP_CREDENTIALS
+      credentials: {
+        client_email: process.env.GCP_CLIENT_EMAIL,
+        private_key: process.env.GCP_PRIVATE_KEY
+      }
     })
     const bucket = storage.bucket(process.env.GCP_BUCKETNAME)
     deleteTargets.forEach((target) => {

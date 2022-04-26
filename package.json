@@ -13,6 +13,7 @@
     "build:client": "next build && next export",
     "build:server": "npm run build --prefix server",
     "generate": "run-p generate:*",
+    "generate:prisma": "prisma generate",
     "generate:aspida": "aspida",
     "generate:pathpida": "pathpida --enableStatic",
     "generate:server": "npm run generate --prefix server",
@@ -55,7 +56,6 @@
   },
   "devDependencies": {
     "@testing-library/react": "^12.1.2",
-    "blanc-cli": "github:londonderry-air/blanc-cli",
     "@types/jest": "^27.4.0",
     "@types/multer": "^1.4.7",
     "@types/node": "^17.0.15",
@@ -63,6 +63,7 @@
     "@typescript-eslint/eslint-plugin": "^5.10.2",
     "@typescript-eslint/parser": "^5.10.2",
     "babel-jest": "^27.5.0",
+    "blanc-cli": "github:londonderry-air/blanc-cli",
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.0",
     "eslint": "^7.24.0",

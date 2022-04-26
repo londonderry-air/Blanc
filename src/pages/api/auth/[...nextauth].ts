@@ -4,7 +4,7 @@ import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { PrismaClient } from '@prisma/client'
 import { apiClient } from '~/utils/apiClient'
 import { DEFAULT_IMAGE } from '~/utils/variable'
-import { signIn, signOut } from 'next-auth/react'
+import { signOut } from 'next-auth/react'
 
 const prisma = new PrismaClient()
 
@@ -21,7 +21,6 @@ export default NextAuth({
       const { body: userCount } = await apiClient.v1.admin.user.count.get()
       const isInitial = userCount === 0
       const isEmailEmpty = user.email === null || user.email === undefined
-      console.log('isInitial: ' + isInitial)
       if (isEmailEmpty) {
         return false
       }
@@ -49,7 +48,6 @@ export default NextAuth({
       return true
     },
     async session({ session, user }) {
-      console.log(session)
       const now = new Date()
       const expire = new Date(session.expires)
       const isEmailEmpty = user.email === null || user.email === undefined
