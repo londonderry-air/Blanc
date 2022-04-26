@@ -12,7 +12,7 @@
     "generate": "run-p generate:*",
     "generate:frourio": "frourio",
     "generate:prisma": "prisma generate",
-    "migrate": "prisma migrate dev",
+    "migrate": "prisma migrate deploy --preview-feature",
     "migrate:dev": "prisma migrate dev",
     "migrate:dev:createonly": "prisma migrate dev --create-only",
     "migrate:reset": "prisma migrate reset",
