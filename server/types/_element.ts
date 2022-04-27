@@ -13,7 +13,7 @@ export type BlancComponent = typeof blancComponents[number]
 export type BlancElement = {
     id: string,
     component: BlancComponent,
-    post: Post
+    post?: Post
     data: any
 }
 

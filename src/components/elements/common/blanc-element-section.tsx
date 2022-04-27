@@ -13,6 +13,7 @@ export const BlancCommonText = (props: BlancCommonTextProps) => {
   const countRef = useRef(0)
 
   useEffect(() => {
+    if (!props.post) return
     const elements = props.post.elements as unknown as BlancElement[]
     for (let i = 0; i < elements.length; i++) {
       if (elements[i].id === props.id) {

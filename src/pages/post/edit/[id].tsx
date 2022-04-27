@@ -12,6 +12,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import { themeColorState, deleteFileList, notifierState } from '~/states/atoms'
 import { useSession } from 'next-auth/react'
 import { EditPost } from '$/types/post'
+import { BlancElement } from '$/types/_element'
 
 export const Page = () => {
   // const { data: session, status: sessionStatus } = useSession()
@@ -50,7 +51,10 @@ export const Page = () => {
   const onSave = useCallback(async (p: EditPost) => {
     console.log(p)
     try {
-      const res = await apiClient.v1.post.id.put({ body: JSON.parse(JSON.stringify(p)) })
+      (p.elements as unknown as BlancElement[]).forEach(elm => {
+        delete elm.post
+      })
+      const res = await apiClient.v1.post.id.put({ body: p })
       await apiClient.v1.storage.delete({
         body: deleteList.current
       })
@@ -75,6 +79,7 @@ export const Page = () => {
       }
       mutate()
     } catch (e) {
+      console.log(e)
       setNotifier({
         state: 'caution',
         message: {
