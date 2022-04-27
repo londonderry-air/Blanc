@@ -1,4 +1,4 @@
-import { BlancFile, Content, Item } from '$/node_modules/@prisma/client'
+import { BlancFile, Content, Item } from '@prisma/client'
 import { useEffect, useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { modalState, themeColorState } from '~/states/atoms'

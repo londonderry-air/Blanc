@@ -1,4 +1,4 @@
-import { Post, Content, Category, Item, BlancFile } from '$/node_modules/@prisma/client'
+import { Post, Content, Category, Item, BlancFile } from '@prisma/client'
 import { Cluster } from '../layout/cluster'
 import { _LargeH, _Word } from '../atoms/text/_text'
 import { FlexBox } from '../atoms/box/flex'

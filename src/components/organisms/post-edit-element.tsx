@@ -8,7 +8,7 @@ import { Button } from '../atoms/button/button'
 import { StackText } from '../atoms/text/stack'
 import { HoverFadeBox } from '../animation/aniamte-hover-fade-box'
 import { Box } from '../atoms/box/box'
-import { Post } from '$/node_modules/@prisma/client'
+import { Post } from '@prisma/client'
 
 export const PostEditElement = (props: {
   post: Post

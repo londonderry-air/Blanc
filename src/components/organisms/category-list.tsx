@@ -1,4 +1,4 @@
-import { Category } from '$/node_modules/@prisma/client'
+import { Category } from '@prisma/client'
 import { useRecoilValue } from 'recoil'
 import { themeColorState } from '~/states/atoms'
 import { FlexBox } from '../atoms/box/flex'

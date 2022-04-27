@@ -1,4 +1,4 @@
-import { Category, ItemParam } from '$/node_modules/@prisma/client'
+import { Category, ItemParam } from '@prisma/client'
 import { ContentWithRelation } from '$/types/content'
 import { ItemParamType } from '$/types/item'
 import useAspidaSWR from '@aspida/swr'

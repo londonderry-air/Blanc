@@ -1,4 +1,4 @@
-import { Item } from '$/node_modules/.prisma/client'
+import { Item } from '@prisma/client'
 import { ItemWithRelation } from '$/types/item'
 import useAspidaSWR from '@aspida/swr'
 import { useRouter } from 'next/router'

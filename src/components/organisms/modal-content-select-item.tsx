@@ -1,4 +1,4 @@
-import { Content } from '$/node_modules/@prisma/client'
+import { Content } from '@prisma/client'
 import { useRecoilValue } from 'recoil'
 import { themeColorState } from '~/states/atoms'
 import { moduler } from '~/utils/styles'

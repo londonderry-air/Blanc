@@ -2,7 +2,7 @@ import { ButtonProps } from '$/types/element'
 import { NextRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { HomeHeader } from '../molucules/home-header'
-import { Category, Content, ItemParam } from '$/node_modules/@prisma/client'
+import { Category, Content, ItemParam } from '@prisma/client'
 import { ItemParamType } from '$/types/item'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import {

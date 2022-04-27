@@ -1,4 +1,4 @@
-import { BlancFile, Content, Item } from '$/node_modules/@prisma/client'
+import { BlancFile, Content, Item } from '@prisma/client'
 import { useEffect, useRef, useState } from 'react'
 import { moduler } from '~/utils/styles'
 import { AnimateScrollVisibleBox } from '../animation/animate-scroll-visible-box'

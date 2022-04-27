@@ -1,4 +1,4 @@
-import { Content, Category } from '$/node_modules/@prisma/client'
+import { Content, Category } from '@prisma/client'
 import { FlexBox } from '../atoms/box/flex'
 import { FitScreenBox } from '../atoms/box/fit-screen'
 import { PostListItem } from './post-list-item'

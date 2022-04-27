@@ -9,7 +9,7 @@ import { moduler } from '~/utils/styles'
 import { Button } from '~/components/atoms/button/button'
 import { Input } from '~/components/molucules/field-input'
 import { ClickUpload } from '~/components/molucules/field-click-upload'
-import { BlancFile } from '$/node_modules/@prisma/client'
+import { BlancFile } from '@prisma/client'
 import { useRouter } from 'next/router'
 
 export const Page = () => {

@@ -1,4 +1,4 @@
-import { BlancFile } from '$/node_modules/@prisma/client'
+import { BlancFile } from '@prisma/client'
 import { randomStr } from './variable'
 
 export const createBlancFile = (

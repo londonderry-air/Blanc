@@ -1,4 +1,4 @@
-import { Content } from '$/node_modules/@prisma/client'
+import { Content } from '@prisma/client'
 import { useState } from 'react'
 import { Box } from '../atoms/box/box'
 import { Stack } from '../layout/stack'

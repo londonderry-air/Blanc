@@ -1,4 +1,4 @@
-import { Post } from '$/node_modules/@prisma/client'
+import { Post } from '@prisma/client'
 import { useRecoilValue } from 'recoil'
 import { themeColorState } from '~/states/atoms'
 import { BorderBox } from '../atoms/box/border'

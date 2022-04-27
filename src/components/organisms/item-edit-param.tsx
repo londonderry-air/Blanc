@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ItemParam, Prisma } from '$/node_modules/@prisma/client'
+import { ItemParam, Prisma } from '@prisma/client'
 import { FlexBox } from '../atoms/box/flex'
 import { SetterOrUpdater, useRecoilState, useRecoilValue } from 'recoil'
 import { editItemState, themeColorState } from '~/states/atoms'

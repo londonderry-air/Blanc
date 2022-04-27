@@ -1,4 +1,4 @@
-import { Category } from '$/node_modules/@prisma/client'
+import { Category } from '@prisma/client'
 import { Cluster } from '../layout/cluster'
 import { Stack } from '../layout/stack'
 import { _LargeH } from '../atoms/text/_text'

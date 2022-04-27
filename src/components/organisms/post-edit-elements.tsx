@@ -2,7 +2,7 @@
 // use 'any' because Prisma.JsonValue can't adopt custom type
 // https://github.com/prisma/prisma/issues/3219
 
-import { Post, Prisma } from '$/node_modules/@prisma/client'
+import { Post, Prisma } from "@prisma/client"
 import { BlancElement } from '$/types/$element'
 import { useState } from 'react'
 import { PostEditElement } from './post-edit-element'

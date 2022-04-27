@@ -8,7 +8,7 @@ import {
   Category,
   ItemParam,
   Post
-} from '$/node_modules/@prisma/client'
+} from '@prisma/client'
 import { ItemWithRelation } from '$/types/item'
 import { BlancUserWithRelation } from '$/types/user'
 import { ContentWithRelation } from '$/types/content'

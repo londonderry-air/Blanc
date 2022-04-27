@@ -4,7 +4,7 @@ import { editItemParamState, themeColorState } from '~/states/atoms'
 import { EditTextField } from '../molucules/edit-field-text'
 import { EditSwitchField } from '../molucules/edit-field-switch'
 import { NextRouter } from 'next/router'
-import { ItemParam } from '$/node_modules/@prisma/client'
+import { ItemParam } from '@prisma/client'
 
 export const ItemParamEdit = (props: { router: NextRouter }) => {
   const color = useRecoilValue(themeColorState)

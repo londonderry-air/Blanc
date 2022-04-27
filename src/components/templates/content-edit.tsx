@@ -1,4 +1,4 @@
-import { Category, Content, ItemParam } from '$/node_modules/@prisma/client'
+import { Category, Content, ItemParam } from '@prisma/client'
 import { FitScreenBox } from '../atoms/box/fit-screen'
 import { EditBox } from '../molucules/edit-box'
 import { useRecoilValue } from 'recoil'

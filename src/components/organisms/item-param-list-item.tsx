@@ -1,4 +1,4 @@
-import { ItemParam } from '$/node_modules/@prisma/client'
+import { ItemParam } from '@prisma/client'
 import { WordListKey } from '$/types/locale'
 import { useRecoilValue } from 'recoil'
 import { themeColorState } from '~/states/atoms'

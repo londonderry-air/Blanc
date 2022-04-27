@@ -1,4 +1,4 @@
-import { Item, Content, BlancFile } from '$/node_modules/@prisma/client'
+import { Item, Content, BlancFile } from '@prisma/client'
 import { Cluster } from '../layout/cluster'
 import { _LargeH } from '../atoms/text/_text'
 import { moduler } from '~/utils/styles'

@@ -1,4 +1,4 @@
-import { Category } from '$/node_modules/@prisma/client'
+import { Category } from '@prisma/client'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { editCategoryState, themeColorState } from '~/states/atoms'
 import { EditTextField } from '../molucules/edit-field-text'

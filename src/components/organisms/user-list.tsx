@@ -3,7 +3,7 @@ import {
   Category,
   BlancFile,
   BlancUser
-} from '$/node_modules/@prisma/client'
+} from '@prisma/client'
 import { FlexBox } from '../atoms/box/flex'
 import { FitScreenBox } from '../atoms/box/fit-screen'
 import { PostListItem } from './post-list-item'

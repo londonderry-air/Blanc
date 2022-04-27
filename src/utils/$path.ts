@@ -1,13 +1,4 @@
-import type { OptionalQuery as OptionalQuery0 } from '../pages/article'
-import type { Query as Query1 } from '../pages/article/entry'
-
 export const pagesPath = {
-  article: {
-    entry: {
-      $url: (url: { query: Query1, hash?: string }) => ({ pathname: '/article/entry' as const, query: url.query, hash: url.hash })
-    },
-    $url: (url?: { query?: OptionalQuery0, hash?: string }) => ({ pathname: '/article' as const, query: url?.query, hash: url?.hash })
-  },
   authenticate: {
     unregistered: {
       $url: (url?: { hash?: string }) => ({ pathname: '/authenticate/unregistered' as const, hash: url?.hash })
@@ -54,8 +45,7 @@ export const pagesPath = {
   },
   welcome: {
     $url: (url?: { hash?: string }) => ({ pathname: '/welcome' as const, hash: url?.hash })
-  },
-  $url: (url?: { hash?: string }) => ({ pathname: '/' as const, hash: url?.hash })
+  }
 }
 
 export type PagesPath = typeof pagesPath

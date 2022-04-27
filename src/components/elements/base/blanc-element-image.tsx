@@ -1,4 +1,4 @@
-import { BlancFile } from '$/node_modules/@prisma/client'
+import { BlancFile } from '@prisma/client'
 import { randomStr } from '~/utils/variable'
 import { _ElementImage } from './_element-image'
 

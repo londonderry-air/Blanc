@@ -1,4 +1,4 @@
-import { Content, Category } from '$/node_modules/@prisma/client'
+import { Content, Category } from '@prisma/client'
 import { PublishStatus } from '$/types/status'
 import { useState } from 'react'
 import { moduler } from '~/utils/styles'

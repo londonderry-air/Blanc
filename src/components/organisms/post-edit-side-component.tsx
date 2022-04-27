@@ -1,4 +1,4 @@
-import { Post } from '$/node_modules/@prisma/client'
+import { Post } from '@prisma/client'
 import { FlexBox } from '../atoms/box/flex'
 import { Box } from '../layout/box'
 import { BlancComponent, blancComponents } from '$/types/$element'

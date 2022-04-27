@@ -6,7 +6,7 @@ import { Stack } from '../layout/stack'
 import { moduler } from '~/utils/styles'
 import { Box } from '../layout/box'
 import { Upload } from './field-upload'
-import { BlancFile } from '$/node_modules/@prisma/client'
+import { BlancFile } from '@prisma/client'
 
 export const SideUploadField = (props: {
   title: string

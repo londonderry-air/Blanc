@@ -1,4 +1,4 @@
-import { Item } from '$/node_modules/@prisma/client'
+import { Item } from '@prisma/client'
 import { NextRouter } from 'next/router'
 import { EditNav } from '../molucules/edit-nav'
 

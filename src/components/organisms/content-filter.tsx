@@ -1,4 +1,4 @@
-import { Content } from '$/node_modules/@prisma/client'
+import { Content } from '@prisma/client'
 import { useRef } from 'react'
 import { moduler } from '~/utils/styles'
 import { AnimateScrollVisibleBox } from '../animation/animate-scroll-visible-box'
