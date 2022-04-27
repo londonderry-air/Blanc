@@ -11,7 +11,7 @@ import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
 
 const Page = () => {
-  const { data: session, status: sessionStatus } = useSession()
+  // const { data: session, status: sessionStatus } = useSession()
   const { data: posts, mutate } = useAspidaSWR(apiClient.v1.admin.post)
   const { data: contents, mutate: mutateContent } = useAspidaSWR(
     apiClient.v1.content
@@ -45,26 +45,26 @@ const Page = () => {
     console.log(categories)
   }, [posts])
 
-  if (sessionStatus === 'loading') {
-    return <></>
-  }
+  // if (sessionStatus === 'loading') {
+  //   return <></>
+  // }
 
-  if (sessionStatus !== 'authenticated') {
-    router.push('/authenticate')
-    return <></>
-  }
+  // if (sessionStatus !== 'authenticated') {
+  //   router.push('/authenticate')
+  //   return <></>
+  // }
 
-  if (!session) {
-    router.push('/authenticate')
-    return <></>
-  }
+  // if (!session) {
+  //   router.push('/authenticate')
+  //   return <></>
+  // }
 
-  console.log(session)
+  // console.log(session)
 
-  if (!session.user.isBlancUser) {
-    router.push('/authenticate')
-    return <></>
-  }
+  // if (!session.user.isBlancUser) {
+  //   router.push('/authenticate')
+  //   return <></>
+  // }
 
   return (
     <>
