@@ -15,8 +15,11 @@ export default defineController(() => ({
     try {
       if (!process.env.GCP_BUCKETNAME) return { status: 400, body: '' }
       const storage = new Storage({
-        projectId: process.env.PROJECT_ID,
-        keyFilename: process.env.GCP_CREDENTIALS
+        projectId: process.env.GCP_PROJECT_ID,
+        credentials: {
+          client_email: process.env.GCP_CLIENT_EMAIL,
+          private_key: process.env.GCP_PRIVATE_KEY
+        }
       })
       const bucket = storage.bucket(process.env.GCP_BUCKETNAME)
       const filename = `${randomUUID()}.${body.file.filename.split('.').pop()}`
@@ -37,6 +40,7 @@ export default defineController(() => ({
         })
       }
     } catch (e) {
+      console.log(e)
       return { status: 400, body: e }
     }
   },
