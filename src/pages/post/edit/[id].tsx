@@ -11,6 +11,7 @@ import { MessageModal } from '~/components/molucules/modal'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import { themeColorState, deleteFileList, notifierState } from '~/states/atoms'
 import { useSession } from 'next-auth/react'
+import { EditPost } from '$/types/post'
 
 export const Page = () => {
   // const { data: session, status: sessionStatus } = useSession()
@@ -46,11 +47,10 @@ export const Page = () => {
     }
   }, [])
 
-  const onSave = useCallback(async () => {
-    console.log(post)
-    if (!post) return
+  const onSave = useCallback(async (p: EditPost) => {
+    console.log(p)
     try {
-      const res = await apiClient.v1.post.id.put({ body: post })
+      const res = await apiClient.v1.post.id.put({ body: JSON.parse(JSON.stringify(p)) })
       await apiClient.v1.storage.delete({
         body: deleteList.current
       })
@@ -73,10 +73,8 @@ export const Page = () => {
           }
         })
       }
-      console.log(post)
       mutate()
     } catch (e) {
-      console.log(e)
       setNotifier({
         state: 'caution',
         message: {
@@ -108,7 +106,7 @@ export const Page = () => {
       <Wrap opacity={wrapStyle.opacity}>
         <PostEditHeader
           post={post}
-          onSave={async () => { onSave() }}
+          onSave={async () => { onSave(post) }}
           onDelete={() => setDeleteModalVisible(true)}
           onRender={(elm) => {
             const rect = elm.getBoundingClientRect()
