@@ -16,6 +16,7 @@ export default NextAuth({
       clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET ?? ''
     })
   ],
+  secret: process.env.NEXT_PUBLIC_NEXTAUTH_SECRET ?? 'secret',
   callbacks: {
     async signIn({ user }) {
       const { body: userCount } = await apiClient.v1.admin.user.count.get()
@@ -105,6 +106,5 @@ export default NextAuth({
     colorScheme: 'light', // "auto" | "dark" | "light"
     brandColor: '282836', // Hex color code
     logo: '/blanc.png' // Absolute URL to image
-  },
-  secret: 'secret'
+  }
 })
