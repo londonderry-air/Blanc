@@ -1,4 +1,4 @@
-import { BlancComponent } from '$/types/$element'
+import { BlancComponent } from '$/types/_element'
 import { useRecoilValue } from 'recoil'
 import { themeColorState } from '~/states/atoms'
 import { BorderBox } from '../atoms/box/border'

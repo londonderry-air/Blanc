@@ -1,7 +1,7 @@
 import { Post } from '@prisma/client'
 import { FlexBox } from '../atoms/box/flex'
 import { Box } from '../layout/box'
-import { BlancComponent, blancComponents } from '$/types/$element'
+import { BlancComponent, blancComponents } from '$/types/_element'
 import { PostEditComponentListItem } from './post-edit-component-list-item'
 
 export const PostEditSideComponent = (props: {

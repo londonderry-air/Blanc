@@ -9,7 +9,7 @@ import { PostEditSideSettings } from './post-edit-side-settings'
 import { PostEditSideSeo } from './post-edit-side-seo'
 import { useState } from 'react'
 import { PostEditSideComponent } from './post-edit-side-component'
-import { BlancComponent } from '$/types/$element'
+import { BlancComponent } from '$/types/_element'
 
 export const PostEditSide = (props: {
   post: EditPost

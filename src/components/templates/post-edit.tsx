@@ -1,5 +1,5 @@
 import { EditPost } from '$/types/post'
-import { BlancComponent, BlancElement } from '$/types/$element'
+import { BlancComponent, BlancElement } from '$/types/_element'
 import { useState } from 'react'
 import styled from 'styled-components'
 import { Sidebar } from '~/components/layout/sidebar'

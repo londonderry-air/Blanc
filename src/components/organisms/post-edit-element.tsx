@@ -1,4 +1,4 @@
-import { BlancComponent, BlancElement } from '$/types/$element'
+import { BlancComponent, BlancElement } from '$/types/_element'
 import dynamic from 'next/dynamic'
 import { useRecoilValue } from 'recoil'
 import { themeColorState } from '~/states/atoms'

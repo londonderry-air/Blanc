@@ -1,4 +1,4 @@
-import { BlancElement } from '$/types/$element'
+import { BlancElement } from '$/types/_element'
 import { AlignBox } from '~/components/atoms/box/align'
 import {
   BlancElementImage,

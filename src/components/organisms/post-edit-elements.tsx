@@ -3,7 +3,7 @@
 // https://github.com/prisma/prisma/issues/3219
 
 import { Post, Prisma } from "@prisma/client"
-import { BlancElement } from '$/types/$element'
+import { BlancElement } from '$/types/_element'
 import { useState } from 'react'
 import { PostEditElement } from './post-edit-element'
 

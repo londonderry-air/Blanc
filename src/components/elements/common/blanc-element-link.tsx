@@ -1,4 +1,4 @@
-import { BlancElement } from '$/types/$element'
+import { BlancElement } from '$/types/_element'
 import styled from 'styled-components'
 import { moduler } from '~/utils/styles'
 import {

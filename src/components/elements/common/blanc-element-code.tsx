@@ -1,4 +1,4 @@
-import { BlancElement } from '$/types/$element'
+import { BlancElement } from '$/types/_element'
 import { BorderBox } from '~/components/atoms/box/border'
 import { AlignBox } from '~/components/atoms/box/align'
 import { FlexBox } from '~/components/atoms/box/flex'

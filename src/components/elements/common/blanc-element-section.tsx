@@ -1,4 +1,4 @@
-import { BlancElement } from '$/types/$element'
+import { BlancElement } from '$/types/_element'
 import { useEffect, useRef } from 'react'
 import { FlexBox } from '~/components/atoms/box/flex'
 import { _Word } from '~/components/atoms/text/_text'
