@@ -16,7 +16,7 @@ export default NextAuth({
       clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET ?? ''
     })
   ],
-  secret: process.env.NEXT_PUBLIC_NEXTAUTH_SECRET ?? 'secret',
+  secret: process.env.NEXT_PUBLIC_SECRET ?? 'secret',
   callbacks: {
     async signIn({ user }) {
       const { body: userCount } = await apiClient.v1.admin.user.count.get()
