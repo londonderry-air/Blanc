@@ -13,7 +13,7 @@ import { themeColorState, deleteFileList, notifierState } from '~/states/atoms'
 import { useSession } from 'next-auth/react'
 
 export const Page = () => {
-  const { data: session, status: sessionStatus } = useSession()
+  // const { data: session, status: sessionStatus } = useSession()
   const router = useRouter()
   const { id } = router.query
   const { data: post, mutate } = useAspidaSWR(apiClient.v1.admin.post.id, {
@@ -46,6 +46,47 @@ export const Page = () => {
     }
   }, [])
 
+  const onSave = useCallback(async () => {
+    console.log(post)
+    if (!post) return
+    try {
+      const res = await apiClient.v1.post.id.put({ body: post })
+      await apiClient.v1.storage.delete({
+        body: deleteList.current
+      })
+      if (res.body.status === 'success') {
+        setNotifier({
+          state: 'success',
+          message: {
+            main: '投稿を保存しました'
+          }
+        })
+      }
+      if (res.body.status === 'failed') {
+        setNotifier({
+          state: 'caution',
+          message: {
+            main:
+              res.body.exception?.content.jp ??
+              'コンテンツを保存できませんでした',
+            sub: res.body.exception?.solution.jp ?? ''
+          }
+        })
+      }
+      console.log(post)
+      mutate()
+    } catch (e) {
+      console.log(e)
+      setNotifier({
+        state: 'caution',
+        message: {
+          main: '投稿を保存できませんでした',
+          sub: 'お手数をおかけしますが、時間をおいて再度お試しください。'
+        }
+      })
+    }
+  }, [])
+
   useEffect(() => {
     // recoilの内容が onSave にて反映されないため、useRefに保存してから参照する
     deleteList.current = deleteFiles
@@ -67,43 +108,7 @@ export const Page = () => {
       <Wrap opacity={wrapStyle.opacity}>
         <PostEditHeader
           post={post}
-          onSave={async () => {
-            try {
-              const res = await apiClient.v1.post.id.put({ body: post })
-              await apiClient.v1.storage.delete({
-                body: deleteList.current
-              })
-              if (res.body.status === 'success') {
-                setNotifier({
-                  state: 'success',
-                  message: {
-                    main: '投稿を保存しました'
-                  }
-                })
-              }
-              if (res.body.status === 'failed') {
-                setNotifier({
-                  state: 'caution',
-                  message: {
-                    main:
-                      res.body.exception?.content.jp ??
-                      'コンテンツを保存できませんでした',
-                    sub: res.body.exception?.solution.jp ?? ''
-                  }
-                })
-              }
-              console.log(post)
-              mutate()
-            } catch (e) {
-              setNotifier({
-                state: 'caution',
-                message: {
-                  main: '投稿を保存できませんでした',
-                  sub: 'お手数をおかけしますが、時間をおいて再度お試しください。'
-                }
-              })
-            }
-          }}
+          onSave={async () => { onSave() }}
           onDelete={() => setDeleteModalVisible(true)}
           onRender={(elm) => {
             const rect = elm.getBoundingClientRect()
