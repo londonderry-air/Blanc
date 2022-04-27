@@ -8,7 +8,8 @@ import {
   API_JWT_SECRET,
   API_BASE_PATH,
   API_UPLOAD_DIR,
-  CLIENT_ORIGIN
+  BLANC_CLIENT_ORIGIN,
+  BLANC_ADMIN_ORIGIN
 } from '$/service/envValues'
 import server from '$/$server'
 
@@ -16,7 +17,7 @@ export const init = (serverFactory?: FastifyServerFactory) => {
   const app = Fastify({ serverFactory })
   app.register(helmet)
   app.register(cors, {
-    origin: [CLIENT_ORIGIN]
+    origin: [BLANC_ADMIN_ORIGIN, BLANC_CLIENT_ORIGIN]
   })
   app.register(fastifyStatic, {
     root: path.join(__dirname, 'static'),

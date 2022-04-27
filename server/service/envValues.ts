@@ -9,7 +9,8 @@ const API_SERVER_PORT = process.env.PORT ?? process.env.API_SERVER_PORT ?? '8080
 const API_BASE_PATH = process.env.API_BASE_PATH ?? ''
 const API_ORIGIN = process.env.API_ORIGIN ?? ''
 const API_UPLOAD_DIR = process.env.API_UPLOAD_DIR ?? ''
-const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN ?? 'http://localhost:8000'
+const BLANC_ADMIN_ORIGIN = process.env.BLANC_ADMIN_ORIGIN ?? 'http://localhost:8000'
+const BLANC_CLIENT_ORIGIN = process.env.BLANC_CLIENT_ORIGIN ?? 'http://localhost:8000'
 
 export {
   API_JWT_SECRET,
@@ -19,5 +20,6 @@ export {
   API_BASE_PATH,
   API_ORIGIN,
   API_UPLOAD_DIR,
-  CLIENT_ORIGIN
+  BLANC_CLIENT_ORIGIN,
+  BLANC_ADMIN_ORIGIN
 }
