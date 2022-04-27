@@ -7,7 +7,7 @@ import { FlexBox } from '~/components/atoms/box/flex'
 import { Image as ImageElm } from '~/components/atoms/image/image'
 import { StackText } from '~/components/atoms/text/stack'
 import { deleteFileList, themeColorState, uploadFileList } from '~/states/atoms'
-import { BlancFile } from '@prisma/client'
+import { BlancFile } from '$/node_modules/@prisma/client'
 import { createBlancFile } from '~/utils/file'
 import { apiClient } from '~/utils/apiClient'
 

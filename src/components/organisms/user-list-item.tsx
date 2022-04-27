@@ -1,5 +1,4 @@
-import { BlancUser } from '.prisma/client'
-import { BlancFile } from '$/node_modules/@prisma/client'
+import { BlancFile, BlancUser } from '$/node_modules/@prisma/client'
 import { Cluster } from '../layout/cluster'
 import { _LargeH } from '../atoms/text/_text'
 import { moduler } from '~/utils/styles'

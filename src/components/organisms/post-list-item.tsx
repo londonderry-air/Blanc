@@ -1,4 +1,4 @@
-import { Post, Content, Category } from '$/node_modules/@prisma/client'
+import { Post, Content, Category, Item, BlancFile } from '$/node_modules/@prisma/client'
 import { Cluster } from '../layout/cluster'
 import { _LargeH, _Word } from '../atoms/text/_text'
 import { FlexBox } from '../atoms/box/flex'
@@ -15,7 +15,6 @@ import { Link } from '../atoms/link/Link'
 import { BorderBox } from '../atoms/box/border'
 import { DateText } from '../atoms/text/date'
 import { Image } from '../atoms/image/image'
-import { ItemWithRelation } from '$/types/item'
 import { PostWithRelation } from '$/types/post'
 import { HoverFadeBox } from '../animation/aniamte-hover-fade-box'
 
@@ -142,7 +141,7 @@ export const PostListItem = (props: PostListItemProps) => {
   )
 }
 
-const ItemInfo = (props: { item: ItemWithRelation }) => (
+const ItemInfo = (props: { item: Item & { thumbnail: BlancFile | null; } }) => (
   <Link href={`/item/${props.item.id}`}>
     <HoverFadeBox
       amount={{

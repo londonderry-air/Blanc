@@ -59,7 +59,7 @@ const Page = () => {
         list={lst}
         selectedValue={sl}
         placeholder={'--placeholder--'}
-        onChange={(v: string) => setSl(v)}
+        onChange={(v: string | number) => setSl(v as string)}
         isOpen={isFilterOpen}
         onOpen={(b) => setFilterOpen(b)}
       ></HomeSelectListFilter>

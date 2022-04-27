@@ -20,7 +20,7 @@ export const HomeSelectListFilter = (props: {
   selectedValue?: string
   isOpen: boolean
   onOpen: (state: boolean) => void
-  onChange: (value: string) => void
+  onChange: (value: string | number) => void
 }) => {
   const color = useRecoilValue(themeColorState)
   const defaultPlaceholder = '-'

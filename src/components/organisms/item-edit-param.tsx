@@ -5,7 +5,6 @@ import { SetterOrUpdater, useRecoilState, useRecoilValue } from 'recoil'
 import { editItemState, themeColorState } from '~/states/atoms'
 import { EditTextField } from '../molucules/edit-field-text'
 import { EditUploadField } from '../molucules/edit-field-upload'
-import { EditDateField } from '../molucules/edit-field-date'
 import { ItemParamType, ItemWithRelation } from '$/types/item'
 import { EditAreaField } from '../molucules/edit-field-area'
 import { EditSwitchField } from '../molucules/edit-field-switch'
@@ -127,14 +126,6 @@ const EditField = (props: {
             copied[props.param.paramId] = file as any
             props.setter({ ...props.item, data: copied })
           }}
-        />
-      )
-    case 'date':
-      return (
-        <EditDateField
-          title={props.param.name}
-          subTitle={props.param.paramId}
-          description={''}
         />
       )
     default:

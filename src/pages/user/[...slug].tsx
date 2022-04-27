@@ -12,7 +12,7 @@ import { UserEdit } from '~/components/templates/user-edit'
 import { deleteFileList, editItemState, themeColorState } from '~/states/atoms'
 import { apiClient } from '~/utils/apiClient'
 import { editBlancUserState } from '~/states/atoms'
-import { BlancUser } from '.prisma/client'
+import { BlancUser } from '$/node_modules/@prisma/client'
 import { Box } from '~/components/atoms/box/box'
 
 export const Page = () => {

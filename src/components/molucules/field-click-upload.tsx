@@ -1,4 +1,4 @@
-import { BlancFile } from '.prisma/client'
+import { BlancFile } from '$/node_modules/@prisma/client'
 import { useState } from 'react'
 import styled from 'styled-components'
 import { apiClient } from '~/utils/apiClient'

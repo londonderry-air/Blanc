@@ -11,8 +11,9 @@ export const PostEdit = (props: { post: EditPost; height: string }) => {
   const [render, forceRerender] = useState(false)
   const onAddElement = (component: BlancComponent) => {
     if (props.post.elements) {
-      ;(props.post.elements as BlancElement[]).push({
+      ;(props.post.elements as unknown as BlancElement[]).push({
         id: randomStr(),
+        post: props.post,
         component: component,
         data: {}
       })

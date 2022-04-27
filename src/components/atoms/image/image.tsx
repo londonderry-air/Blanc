@@ -8,7 +8,7 @@ export const Image = styled.div<{
   fit: NonNullable<JSX.IntrinsicElements['img']['style']>['objectFit']
   radius?: string
   border?: BorderProps
-  cursor?: NonNullable<JSX.IntrinsicElements['img']['style']>['pointer']
+  cursor?: string
 }>`
   width: ${(props) => props.width};
   height: ${(props) => props.height};

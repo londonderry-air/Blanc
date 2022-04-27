@@ -1,5 +1,4 @@
 import { BlancElement } from '$/types/$element'
-import { Prisma } from '.prisma/client'
 import { useEffect, useRef } from 'react'
 import { FlexBox } from '~/components/atoms/box/flex'
 import { _Word } from '~/components/atoms/text/_text'
@@ -14,9 +13,9 @@ export const BlancCommonText = (props: BlancCommonTextProps) => {
   const countRef = useRef(0)
 
   useEffect(() => {
-    const elements = props.post.elements as Prisma.JsonArray
+    const elements = props.post.elements as unknown as BlancElement[]
     for (let i = 0; i < elements.length; i++) {
-      if ((elements[i] as unknown as BlancElement).id === props.id) {
+      if (elements[i].id === props.id) {
         break
       }
       if (
