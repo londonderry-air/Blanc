@@ -9,7 +9,7 @@ import { StackText } from '../atoms/text/stack'
 import { PublishCell } from '../atoms/cell/publish'
 import { FlexBox } from '../atoms/box/flex'
 import { PublishStatus } from '$/types/status'
-import { AnimateHoverBorderBox } from '../animation/animate-hover-border-box'
+import { HoverBorderBox } from '../atoms/box/border'
 import { Image } from '../atoms/image/image'
 import { Link } from '../atoms/link/Link'
 import { BorderBox } from '../atoms/box/border'
@@ -25,10 +25,14 @@ export const ItemListItem = (props: {
   return (
     <Link href={`/item/${props.item.id}`} width={'100%'}>
       <Box width={'100%'}>
-        <AnimateHoverBorderBox
+        <HoverBorderBox
           padding={`${moduler(-1)} ${moduler(1)} ${moduler(-1)} ${moduler(1)}`}
-          unhoverWidth={'0em'}
-          hoverWidth={'0.5em'}
+          unhover={{
+            width: '0em'
+          }}
+          hover={{
+            width: '0.5em'
+          }}
           color={color.text}
         >
           <Cluster
@@ -92,7 +96,7 @@ export const ItemListItem = (props: {
               </Box>
             </Cluster>
           </Cluster>
-        </AnimateHoverBorderBox>
+        </HoverBorderBox>
       </Box>
     </Link>
   )

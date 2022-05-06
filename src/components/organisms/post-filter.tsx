@@ -1,6 +1,5 @@
 import { Content, Category } from '@prisma/client'
-import { PublishStatus } from '$/types/status'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { moduler } from '~/utils/styles'
 import { AnimateScrollVisibleBox } from '../animation/animate-scroll-visible-box'
 import { FlexBox } from '../atoms/box/flex'
@@ -8,6 +7,9 @@ import { Cluster } from '../layout/cluster'
 import { HomeCheckBoxFilter } from '../molucules/home-filter-checkbox'
 import { HomeSelectListFilter } from '../molucules/home-filter-selectlist'
 import { HomeTextFilter } from '../molucules/home-filter-text'
+import { getPublishState } from '~/utils/status'
+import { PostWithRelation } from '$/types/post'
+import { PublishStatus } from '$/types/status'
 
 export const PostFilter = (props: PostFilterProps) => {
   const [content, setFilterContent] = useState<Content>()
@@ -19,13 +21,71 @@ export const PostFilter = (props: PostFilterProps) => {
   const [isComingsoonFilterActive, setComingsoonFilterActive] = useState(false)
   const [isContentFilterOpen, setContentFilterState] = useState(false)
   const [isCategoryFilterOpen, setCategoryFilterState] = useState(false)
+
+  const filter = useRef<{
+    title?: string,
+    content?: Content,
+    category?: Category,
+    isPublish: boolean,
+    isDraft: boolean,
+    isExpired: boolean,
+    isComingsoon: boolean
+  }>({
+    isPublish: false,
+    isDraft: false,
+    isExpired: false,
+    isComingsoon: false
+  })
+
+  const filterPost = (
+    title?: string,
+    content?: Content,
+    category?: Category,
+    isPublish?: boolean,
+    isDraft?: boolean,
+    isExpired?: boolean,
+    isComingsoon?: boolean
+  ) => (
+    props.posts
+      .filter(post => title 
+        ? title.length >= 2 
+          ? post.title.includes(title)
+          : true 
+        : true)
+      .filter(post => content ? content.id === post.contentId : true)
+      .filter(post => category ? category.id === post.categoryId : true)
+      .filter(post => {
+        const state = getPublishState(post)
+        const filterState: PublishStatus[] = []
+        if (isPublish) { filterState.push('publish') }
+        if (isDraft) { filterState.push('draft') }
+        if (isExpired) { filterState.push('expired') }
+        if (isComingsoon) { filterState.push('comingsoon') }
+        return filterState.length === 0 ? true : filterState.includes(state)
+      })
+  )
+
   return (
     <AnimateScrollVisibleBox isVisible={props.isFilterOpen}>
       <Cluster gap={`${moduler(2)} ${moduler(8)}`}>
         <HomeTextFilter
           title={'検索'}
           subTitle={'SEARCH'}
-          onInput={(e) => props.onSearchInput(e)}
+          onInput={(str) => {
+            filter.current.title = str
+            props.onFilter(
+              filterPost(
+                str,
+                filter.current.content,
+                filter.current.category,
+                filter.current.isPublish,
+                filter.current.isDraft,
+                filter.current.isExpired,
+                filter.current.isComingsoon
+              )
+            )
+            console.log(filter)
+          }}
         ></HomeTextFilter>
         <FlexBox
           way={'row'}
@@ -39,7 +99,18 @@ export const PostFilter = (props: PostFilterProps) => {
             onChange={() => {
               const newState = !isPublishFilterActive
               setPublishFilterActive(newState)
-              props.onPublishStateChange('publish', newState)
+              filter.current.isPublish = newState
+              props.onFilter(
+                filterPost(
+                  filter.current.title,
+                  filter.current.content,
+                  filter.current.category,
+                  filter.current.isPublish,
+                  filter.current.isDraft,
+                  filter.current.isExpired,
+                  filter.current.isComingsoon
+                )
+              )
             }}
             isActive={isPublishFilterActive}
           />
@@ -49,7 +120,18 @@ export const PostFilter = (props: PostFilterProps) => {
             onChange={() => {
               const newState = !isDraftFilterActive
               setDraftFilterActive(newState)
-              props.onPublishStateChange('draft', newState)
+              filter.current.isDraft = newState
+              props.onFilter(
+                filterPost(
+                  filter.current.title,
+                  filter.current.content,
+                  filter.current.category,
+                  filter.current.isPublish,
+                  filter.current.isDraft,
+                  filter.current.isExpired,
+                  filter.current.isComingsoon
+                )
+              )
             }}
             isActive={isDraftFilterActive}
           />
@@ -59,7 +141,18 @@ export const PostFilter = (props: PostFilterProps) => {
             onChange={() => {
               const newState = !isComingsoonFilterActive
               setComingsoonFilterActive(newState)
-              props.onPublishStateChange('comingsoon', newState)
+              filter.current.isComingsoon = newState
+              props.onFilter(
+                filterPost(
+                  filter.current.title,
+                  filter.current.content,
+                  filter.current.category,
+                  filter.current.isPublish,
+                  filter.current.isDraft,
+                  filter.current.isExpired,
+                  filter.current.isComingsoon
+                )
+              )
             }}
             isActive={isComingsoonFilterActive}
           />
@@ -69,7 +162,18 @@ export const PostFilter = (props: PostFilterProps) => {
             onChange={() => {
               const newState = !isExpiredFilterActive
               setExpiredFilterActive(newState)
-              props.onPublishStateChange('expired', newState)
+              filter.current.isExpired = newState
+              props.onFilter(
+                filterPost(
+                  filter.current.title,
+                  filter.current.content,
+                  filter.current.category,
+                  filter.current.isPublish,
+                  filter.current.isDraft,
+                  filter.current.isExpired,
+                  filter.current.isComingsoon
+                )
+              )
             }}
             isActive={isExpiredFilterActive}
           />
@@ -83,17 +187,31 @@ export const PostFilter = (props: PostFilterProps) => {
           <HomeSelectListFilter
             title={'コンテンツ'}
             subTitle={'CONTENT'}
-            selectedValue={content ? content.name : '-'}
-            list={props.contents.map((c) => c.name)}
+            selectedValue={content ? content.name : FILTER_NO_CONTENT}
+            list={props.contents.map((c) => c.name).concat(FILTER_NO_CONTENT)}
             onChange={(s) => {
-              const content = props.contents.filter((c) => c.name === s)[0]
+              const content = props.contents.some((c) => c.name === s) 
+                ? props.contents.filter((c) => c.name === s)[0]
+                : undefined
+
               const categories = props.categories.filter(
-                (c) => c.contentId === content.id
+                (c) => content ? c.contentId === content.id : null
               )
               setFilterContent(content)
               setFilterCategoryList(categories)
               setFilterCategory(null)
-              props.onContentChange(content)
+              filter.current.content = content
+              props.onFilter(
+                filterPost(
+                  filter.current.title,
+                  filter.current.content,
+                  filter.current.category,
+                  filter.current.isPublish,
+                  filter.current.isDraft,
+                  filter.current.isExpired,
+                  filter.current.isComingsoon
+                )
+              )
             }}
             isOpen={isContentFilterOpen}
             onOpen={(b) => setContentFilterState(b)}
@@ -101,12 +219,25 @@ export const PostFilter = (props: PostFilterProps) => {
           <HomeSelectListFilter
             title={'カテゴリー'}
             subTitle={'CATEGORY'}
-            selectedValue={category ? category.name : '-'}
-            list={categoryList.map((c) => c.name)}
+            selectedValue={category ? category.name : FILTER_NO_CONTENT}
+            list={categoryList.map((c) => c.name).concat(FILTER_NO_CONTENT)}
             onChange={(s) => {
-              const category = props.categories.filter((c) => c.name === s)[0]
+              const category = props.categories.some((c) => c.name === s) 
+                ? props.categories.filter((c) => c.name === s)[0]
+                : undefined
               setFilterCategory(category)
-              props.onCategoryChange(category)
+              filter.current.category = category
+              props.onFilter(
+                filterPost(
+                  filter.current.title,
+                  filter.current.content,
+                  filter.current.category,
+                  filter.current.isPublish,
+                  filter.current.isDraft,
+                  filter.current.isExpired,
+                  filter.current.isComingsoon
+                )
+              )
             }}
             isOpen={isCategoryFilterOpen}
             onOpen={(b) => setCategoryFilterState(b)}
@@ -119,11 +250,11 @@ export const PostFilter = (props: PostFilterProps) => {
 
 type PostFilterProps = {
   isFilterOpen: boolean
+  posts: PostWithRelation[]
   contents: Content[]
   categories: Category[]
-  onSearchInput: (keyword: string) => void
-  onPublishStateChange: (publishStatus: PublishStatus, state: boolean) => void
-  onContentChange: (content: Content) => void
-  onCategoryChange: (category: Category) => void
+  onFilter: (posts: PostWithRelation[]) => void
   onFilterOpen: (state: boolean) => void
 }
+
+const FILTER_NO_CONTENT = '設定無し'

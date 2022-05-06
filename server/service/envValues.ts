@@ -11,6 +11,10 @@ const API_ORIGIN = process.env.API_ORIGIN ?? ''
 const API_UPLOAD_DIR = process.env.API_UPLOAD_DIR ?? ''
 const BLANC_ADMIN_ORIGIN = process.env.BLANC_ADMIN_ORIGIN ?? 'http://localhost:8000'
 const BLANC_CLIENT_ORIGIN = process.env.BLANC_CLIENT_ORIGIN ?? 'http://localhost:8000'
+const GCP_BUCKETNAME = process.env.GCP_BUCKETNAME ?? ''
+const GCP_PROJECT_ID = process.env.GCP_PROJECT_ID ?? ''
+const GCP_CLIENT_EMAIL = process.env.GCP_CLIENT_EMAIL ?? ''
+const GCP_PRIVATE_KEY = process.env.GCP_PRIVATE_KEY ? process.env.GCP_PRIVATE_KEY.replace(/\\n/g, '\n') : ''
 
 export {
   API_JWT_SECRET,
@@ -21,5 +25,9 @@ export {
   API_ORIGIN,
   API_UPLOAD_DIR,
   BLANC_CLIENT_ORIGIN,
-  BLANC_ADMIN_ORIGIN
+  BLANC_ADMIN_ORIGIN,
+  GCP_BUCKETNAME,
+  GCP_PROJECT_ID,
+  GCP_CLIENT_EMAIL,
+  GCP_PRIVATE_KEY
 }

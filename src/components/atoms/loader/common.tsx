@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const Loader = styled.div`
+const _Loader = styled.div`
   display: flex;
   flex-direction: row;
   gap: 12px;
@@ -48,12 +48,12 @@ const Loader = styled.div`
   }
 `
 
-export const AnimateLoader = () => {
+export const Loader = () => {
   return (
-    <Loader>
+    <_Loader>
       <span></span>
       <span></span>
       <span></span>
-    </Loader>
+    </_Loader>
   )
 }

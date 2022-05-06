@@ -81,7 +81,7 @@ export const updatePost = (id: Post['id'], post: Prisma.PostUpdateInput) =>
 export const deletePost = (id: Post['id']) =>
   prisma.post.delete({ where: { id } })
 
-export const isValidPost = async (post: Post): Promise<DBValidationResult> => {
+export const validatePost = async (post: Post): Promise<DBValidationResult> => {
   const allPosts = await prisma.post.findMany()
   const isSameSlugExists = allPosts.some(
     (p) =>

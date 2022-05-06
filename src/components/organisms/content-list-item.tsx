@@ -3,7 +3,7 @@ import { LabelTextList } from '../atoms/text/label'
 import { moduler } from '~/utils/styles'
 import { useRecoilValue } from 'recoil'
 import { themeColorState } from '~/states/atoms'
-import { AnimateHoverBorderBox } from '../animation/animate-hover-border-box'
+import { HoverBorderBox } from '../atoms/box/border'
 import { Link } from '../atoms/link/Link'
 import { Box } from '../atoms/box/box'
 import { FlexBox } from '../atoms/box/flex'
@@ -15,10 +15,10 @@ export const ContentListItem = (props: { content: ContentWithRelation }) => {
   return (
     <Link href={`/content/${content.id}`} width={'100%'}>
       <Box width={'100%'}>
-        <AnimateHoverBorderBox
+        <HoverBorderBox
           padding={`${moduler(3)} ${moduler(1)} ${moduler(3)} ${moduler(1)}`}
-          unhoverWidth={'0em'}
-          hoverWidth={'0.5em'}
+          unhover={{width: '0em'}}
+          hover={{width: '0.5em'}}
           color={color.text}
         >
           <FlexBox way={'column'} gap={moduler(-3)}>
@@ -43,7 +43,7 @@ export const ContentListItem = (props: { content: ContentWithRelation }) => {
               color={color.text}
             />
           </FlexBox>
-        </AnimateHoverBorderBox>
+        </HoverBorderBox>
       </Box>
     </Link>
   )

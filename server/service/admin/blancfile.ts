@@ -1,5 +1,6 @@
 import { BlancFile, PrismaClient } from '@prisma/client'
 import { Storage } from '@google-cloud/storage'
+import { GCP_BUCKETNAME, GCP_CLIENT_EMAIL, GCP_PRIVATE_KEY, GCP_PROJECT_ID } from '../envValues'
 
 const prisma = new PrismaClient()
 
@@ -32,24 +33,23 @@ export const createBlancFile = async (file: {
 
 export const deleteBlancFile = async (idList: BlancFile['id'][]) => {
   const filtered = idList.filter((id) => !['', undefined, null].includes(id))
-  if (filtered.length > 0 && process.env.GCP_BUCKETNAME) {
+  if (filtered.length > 0 && GCP_BUCKETNAME) {
     const deleteTargets = await prisma.blancFile.findMany({
       where: { id: { in: filtered } }
     })
     const storage = new Storage({
-      projectId: process.env.GCP_PROJECT_ID,
+      projectId: GCP_PROJECT_ID,
       credentials: {
-        client_email: process.env.GCP_CLIENT_EMAIL,
-        private_key: process.env.GCP_PRIVATE_KEY
+        client_email: GCP_CLIENT_EMAIL,
+        private_key: GCP_PRIVATE_KEY
       }
     })
-    const bucket = storage.bucket(process.env.GCP_BUCKETNAME)
+    const bucket = storage.bucket(GCP_BUCKETNAME)
     deleteTargets.forEach((target) => {
       const filename = target.url ? target.url.split('/').pop() ?? '' : ''
-      console.log(filename)
       const file = bucket.file(filename)
-      file.delete((err) => {
-        if (err) console.log(err)
+      file.delete(() => {
+        // if (err) console.log(err)
       })
     })
     prisma.blancFile.deleteMany({ where: { id: { in: filtered } } })

@@ -1,6 +1,6 @@
 import {
   getContent,
-  isValidContent,
+  validateContent,
   updateContent
 } from '$/service/admin/content'
 import { defineController } from './$relay'
@@ -13,12 +13,12 @@ export default defineController(() => ({
   put: async ({ body }) => {
     try {
       if (!body.id) return { status: 400, body: { status: 'failed' } }
-      const isValid = await isValidContent(body)
+      const validateResult = await validateContent(body)
 
-      if (isValid.status === 'invalid') {
+      if (validateResult .status === 'invalid') {
         return {
           status: 200,
-          body: { status: 'failed', exception: isValid.exception }
+          body: { status: 'failed', exception: validateResult .exception }
         }
       }
 

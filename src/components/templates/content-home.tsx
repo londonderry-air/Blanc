@@ -12,6 +12,7 @@ export const ContentHome = (props: {
   onCreate: () => void
 }) => {
   const color = useRecoilValue(themeColorState)
+  const [contents, setContents] = useState<ContentWithRelation[]>(props.contents)
   const [isFilterOpen, setFilterOpen] = useState(false)
   return (
     <HomeBox>
@@ -41,9 +42,9 @@ export const ContentHome = (props: {
       <ContentFilter
         isFilterOpen={isFilterOpen}
         contents={props.contents}
-        onFiltered={(contents) => console.log(contents)}
+        onFiltered={(contents) => setContents(contents)}
       ></ContentFilter>
-      <ContentList contents={props.contents} isFilterOpen={isFilterOpen} />
+      <ContentList contents={contents} isFilterOpen={isFilterOpen} />
     </HomeBox>
   )
 }

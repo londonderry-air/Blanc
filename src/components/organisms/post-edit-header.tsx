@@ -10,16 +10,29 @@ import { Post } from '@prisma/client'
 import { Button } from '../atoms/button/button'
 import { useRouter } from 'next/router'
 import { Input } from '../molucules/field-input'
-import { MutableRefObject, useEffect, useRef } from 'react'
 
-const Wrap = styled.div`
-  width: 100%;
+const Wrap = styled.div<{
+  width: string,
+  height: string
+}>`
+  width: ${props => props.width};
+  height: ${props => props.height};
   border-bottom: solid 1px ${color.gray};
 `
 
-export const PostEditHeader = (props: PostHeaderProps) => {
+const DEFAULT_WIDTH = '100%';
+const DEFAULT_HEIGHT = '86px';
+
+export const PostEditHeader = (props: {
+  post: Post
+  size?: {
+    width?: string,
+    height?: string
+  }
+  onSave: () => void
+  onDelete: () => void
+}) => {
   const router = useRouter()
-  const ref = useRef() as MutableRefObject<HTMLDivElement>
   const color = useRecoilValue(themeColorState)
   const backButton: ButtonProps = {
     title: '戻る',
@@ -47,14 +60,11 @@ export const PostEditHeader = (props: PostHeaderProps) => {
     }
   ]
 
-  useEffect(() => {
-    if (ref.current) {
-      props.onRender(ref.current)
-    }
-  }, [ref])
-
   return (
-    <Wrap ref={ref}>
+    <Wrap 
+      width={props.size ? props.size.width ?? DEFAULT_WIDTH : DEFAULT_WIDTH} 
+      height={props.size ? props.size.height ?? DEFAULT_HEIGHT : DEFAULT_HEIGHT}
+    >
       <Box padding={`${moduler(-1)} ${moduler(3)}`}>
         <Cluster alignItem="center" gap={'2em'}>
           <Button

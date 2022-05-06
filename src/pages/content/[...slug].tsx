@@ -5,7 +5,7 @@ import useAspidaSWR from '@aspida/swr'
 import { NextRouter, useRouter } from 'next/router'
 import { useCallback, useEffect, useRef } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
-import { AnimateFadeVisibleBox } from '~/components/animation/animate-fade-visible-box'
+import { FadeBox } from '~/components/atoms/box/fade'
 import { Box } from '~/components/atoms/box/box'
 import { ContentEdit } from '~/components/templates/content-edit'
 import {
@@ -140,8 +140,8 @@ export const Page = () => {
 
   return (
     <Box width={'100%'}>
-      <AnimateFadeVisibleBox
-        isVisible={!!content && isTargetCollect(editContent)}
+      <FadeBox
+        status={!!content && isTargetCollect(editContent)}
         translation={{ from: 'bottom', quantity: '10px', duration: '0.5s' }}
       >
         <ContentEdit
@@ -153,7 +153,7 @@ export const Page = () => {
           onSaveItemParam={onSaveItemParam}
           onDeleteItemParam={onDeleteItemParam}
         />
-      </AnimateFadeVisibleBox>
+      </FadeBox>
     </Box>
   )
 }

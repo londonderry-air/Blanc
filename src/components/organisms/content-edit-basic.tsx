@@ -25,6 +25,10 @@ export const ContentEditBasic = () => {
         subTitle={'Content Name'}
         description={`このコンテンツの名前を設定します。`}
         defaultValue={content.name}
+        validators={[{
+          title: {local: '半角英数字のみ入力可能', global: 'Accept Only ENGLISH and NUMBER'},
+          regex: new RegExp(/^[0-9a-zA-Z]*$/, 'g')
+        }]}
         onInput={(s) => setContent({ ...content, name: s })}
       />
       <EditTextField

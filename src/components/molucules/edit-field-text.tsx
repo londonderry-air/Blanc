@@ -4,8 +4,9 @@ import { FieldTitle } from './field-title'
 import { FieldDesc } from './field-description'
 import { Stack } from '../layout/stack'
 import { moduler } from '~/utils/styles'
-import { Box } from '../layout/box'
 import { Input } from './field-input'
+import { Box } from '../atoms/box/box'
+import { Validator } from './validator'
 
 export const EditTextField = (props: {
   width?: string
@@ -13,9 +14,18 @@ export const EditTextField = (props: {
   subTitle?: string
   description?: string
   defaultValue?: string
-  onInput: (str: string) => void
+  validators?: [{
+    title: {
+      local: string,
+      global?: string
+    }
+    regex: RegExp
+  }]
+  isRequired?: boolean
+  onInput: (str: string, isValid?: boolean) => void
 }) => {
   const color = useRecoilValue(themeColorState)
+  const validators = props.validators ?? []
   return (
     <Box width={props.width ?? '60ch'}>
       <Stack margin={moduler(2)}>
@@ -33,9 +43,18 @@ export const EditTextField = (props: {
         )}
         <Input
           width={'100%'}
-          onInput={(s) => props.onInput(s)}
+          onInput={(s) => {
+            const res = validators.some(v => v.regex.test(s))
+            console.log(res)
+            props.onInput(s)
+          }}
           defaultValue={props.defaultValue}
         />
+        <Box width={'30ch'}>
+        {validators.map((v, i) => (
+            <Validator key={i} title={v.title} value={props.defaultValue ?? ''} regex={v.regex} />
+        ))}
+        </Box>
       </Stack>
     </Box>
   )

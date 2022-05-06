@@ -2,7 +2,7 @@ import { FitScreenBox } from '../atoms/box/fit-screen'
 import { EditBox } from '../molucules/edit-box'
 import { useRecoilValue } from 'recoil'
 import { editItemState, themeColorState } from '~/states/atoms'
-import { Sidebar } from '../layout/sidebar'
+import { Sidebar } from '../elements/sidebar'
 import { moduler } from '~/utils/styles'
 import {
   AnimateSwitchOverBox,
@@ -31,7 +31,7 @@ export const ItemEdit = (props: {
         onSaveItem={() => props.onSaveItem()}
         onDeleteItem={() => props.onDeleteItem()}
       />
-      <Sidebar sideWidth="30ch" gap={moduler(6)}>
+      <Sidebar sidePosition={'left'}  sideWidth="30ch" gap={moduler(6)}>
         <ItemEditNav router={props.router} item={item} />
         <FitScreenBox
           borderTop={{

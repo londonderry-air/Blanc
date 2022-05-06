@@ -3,7 +3,7 @@ import { WordListKey } from '$/types/locale'
 import { useRecoilValue } from 'recoil'
 import { themeColorState } from '~/states/atoms'
 import { getLocalWord } from '~/utils/locale'
-import { AnimateHoverBorderBox } from '../animation/animate-hover-border-box'
+import { HoverBorderBox } from '../atoms/box/border'
 import { FlexBox } from '../atoms/box/flex'
 import { BorderBox } from '../atoms/box/border'
 import { StateCell } from '../atoms/cell/state'
@@ -22,11 +22,11 @@ export const ItemParamListItem = (props: { param: ItemParam }) => {
       href={`/content/${props.param.contentId}/item/${props.param.id}`}
     >
       <Box width={'100%'}>
-        <AnimateHoverBorderBox
+        <HoverBorderBox
           color={color.border}
           padding={'0.4em 0.75em'}
-          unhoverWidth={'0em'}
-          hoverWidth={'0.4em'}
+          unhover={{width: '0em'}}
+          hover={{width: '0.4em'}}
         >
           <Cluster justifyContent="space-between">
             <StackText
@@ -91,7 +91,7 @@ export const ItemParamListItem = (props: { param: ItemParam }) => {
               </Cluster>
             </Box>
           </Cluster>
-        </AnimateHoverBorderBox>
+        </HoverBorderBox>
       </Box>
     </Link>
   )

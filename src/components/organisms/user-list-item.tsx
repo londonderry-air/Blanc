@@ -6,7 +6,7 @@ import { useRecoilValue } from 'recoil'
 import { themeColorState } from '~/states/atoms'
 import { StackText } from '../atoms/text/stack'
 import { FlexBox } from '../atoms/box/flex'
-import { AnimateHoverBorderBox } from '../animation/animate-hover-border-box'
+import { HoverBorderBox } from '../atoms/box/border'
 import { Image } from '../atoms/image/image'
 import { Link } from '../atoms/link/Link'
 import { BorderBox } from '../atoms/box/border'
@@ -24,10 +24,10 @@ export const UserListItem = (props: {
   return (
     <Link href={`/user/${props.user.id}`} width={'100%'}>
       <Box width={'100%'}>
-        <AnimateHoverBorderBox
+        <HoverBorderBox
           padding={`${moduler(-1)} ${moduler(1)} ${moduler(-1)} ${moduler(1)}`}
-          unhoverWidth={'0em'}
-          hoverWidth={'0.5em'}
+          unhover={{width: '0em'}}
+          hover={{width: '0.5em'}}
           color={color.text}
         >
           <Cluster
@@ -109,7 +109,7 @@ export const UserListItem = (props: {
               </Box>
             </Cluster>
           </Cluster>
-        </AnimateHoverBorderBox>
+        </HoverBorderBox>
       </Box>
     </Link>
   )

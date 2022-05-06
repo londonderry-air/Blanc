@@ -5,7 +5,7 @@ import useAspidaSWR from '@aspida/swr'
 import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { AnimateFadeVisibleBox } from '~/components/animation/animate-fade-visible-box'
+import { FadeBox } from '~/components/atoms/box/fade'
 import { MessageModal } from '~/components/molucules/modal'
 import { ItemEdit } from '~/components/templates/item-edit'
 import { UserEdit } from '~/components/templates/user-edit'
@@ -75,8 +75,8 @@ export const Page = () => {
 
   return (
     <Box width={'100%'}>
-      <AnimateFadeVisibleBox
-        isVisible={!!editUser && isTargetCollect(editUser)}
+      <FadeBox
+        status={!!editUser && isTargetCollect(editUser)}
         translation={{ from: 'bottom', quantity: '10px', duration: '0.5s' }}
       >
         <UserEdit
@@ -84,7 +84,7 @@ export const Page = () => {
           onSaveUser={() => onSave()}
           onDeleteUser={() => setDeleteModalVisible(true)}
         />
-      </AnimateFadeVisibleBox>
+      </FadeBox>
       <MessageModal
         type={'caution'}
         message={`このユーザーを削除してもよろしいですか？\n削除されたユーザーは復元することができません。\nまた、このユーザーに関する履歴も全て削除されます。`}

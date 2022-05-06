@@ -6,7 +6,7 @@ import { FlexBox } from '../atoms/box/flex'
 import { AlignBox } from '../atoms/box/align'
 import { Button } from '../atoms/button/button'
 import { StackText } from '../atoms/text/stack'
-import { HoverFadeBox } from '../animation/aniamte-hover-fade-box'
+import { HoverFadeBox } from '../atoms/box/fade'
 import { Box } from '../atoms/box/box'
 import { Post } from '@prisma/client'
 

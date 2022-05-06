@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { AnimateLoader } from '~/components/animation/animate-loader'
+import { Loader } from '~/components/atoms/loader/common'
 import { BorderBox } from '~/components/atoms/box/border'
 import { FlexBox } from '~/components/atoms/box/flex'
 import { Image as ImageElm } from '~/components/atoms/image/image'
@@ -185,7 +185,7 @@ export const _ElementImage = (props: {
               radius={props.radius}
             />
           )}
-          {isImageLoading && <AnimateLoader />}
+          {isImageLoading && <Loader />}
         </FlexBox>
       </BorderBox>
     ),

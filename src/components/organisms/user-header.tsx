@@ -1,6 +1,6 @@
 import { signOut, useSession } from 'next-auth/react'
 import { useState } from 'react'
-import { AnimateFadeVisibleBox } from '../animation/animate-fade-visible-box'
+import { FadeBox} from '../atoms/box/fade'
 import { Box } from '../atoms/box/box'
 import { AlignBox } from '../atoms/box/align'
 import { Image } from '../atoms/image/image'
@@ -9,7 +9,7 @@ import { ShadowBox } from '../atoms/box/shadow'
 import { themeColorState } from '~/states/atoms'
 import { useRecoilValue } from 'recoil'
 import { _Word } from '../atoms/text/_text'
-import { AnimateHoverBorderBox } from '../animation/animate-hover-border-box'
+import { HoverBorderBox } from '../atoms/box/border'
 import { StackText } from '../atoms/text/stack'
 import { moduler } from '~/utils/styles'
 import { apiClient } from '~/utils/apiClient'
@@ -68,8 +68,8 @@ export const UserHeader = () => {
         zIndex={'101'}
         pointerEvents={isMenuVisible ? 'all' : 'none'}
       >
-        <AnimateFadeVisibleBox
-          isVisible={isMenuVisible}
+        <FadeBox
+          status={isMenuVisible}
           translation={{
             from: 'bottom',
             quantity: '10px',
@@ -106,7 +106,7 @@ export const UserHeader = () => {
               </FlexBox>
             </FlexBox>
           </ShadowBox>
-        </AnimateFadeVisibleBox>
+        </FadeBox>
       </AlignBox>
     </Box>
   )
@@ -119,10 +119,14 @@ const UserHeaderMenuItem = (props: {
 }) => {
   const color = useRecoilValue(themeColorState)
   return (
-    <AnimateHoverBorderBox
+    <HoverBorderBox
       padding={'0em 0.75em'}
-      unhoverWidth={'0.25em'}
-      hoverWidth={'0.4em'}
+      unhover = {{
+        width: '0.25em'
+      }}
+      hover = {{
+        width: '0.4em'
+      }}
       color={color.border}
       onClick={() => props.onSelect()}
     >
@@ -135,6 +139,6 @@ const UserHeaderMenuItem = (props: {
           size={-2}
         />
       </Box>
-    </AnimateHoverBorderBox>
+    </HoverBorderBox>
   )
 }

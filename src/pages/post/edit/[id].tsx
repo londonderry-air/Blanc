@@ -3,9 +3,7 @@ import { PostEditHeader } from '~/components/organisms/post-edit-header'
 import { apiClient } from '~/utils/apiClient'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import styled from 'styled-components'
 import { PostEdit } from '~/components/templates/post-edit'
-import useWindowSize from '~/hooks/useWindowSize'
 import { Post } from '@prisma/client'
 import { MessageModal } from '~/components/molucules/modal'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
@@ -13,6 +11,12 @@ import { themeColorState, deleteFileList, notifierState } from '~/states/atoms'
 import { useSession } from 'next-auth/react'
 import { EditPost } from '$/types/post'
 import { BlancElement } from '$/types/_element'
+import { FlexBox } from '~/components/atoms/box/flex'
+
+const HEADER_SIZE = {
+  width: '100%',
+  height: '86px'
+}
 
 export const Page = () => {
   // const { data: session, status: sessionStatus } = useSession()
@@ -23,20 +27,13 @@ export const Page = () => {
   })
   const deleteList = useRef<string[]>([])
   const [deleteFiles, setDeleteFiles] = useRecoilState(deleteFileList)
-  const [wrapStyle, setWrapStyle] = useState({
-    // marginTop: '-60px',
-    opacity: 0
-  })
-  const [editorHeight, setEditorHeight] = useState('auto')
   const [isDeleteModalVisible, setDeleteModalVisible] = useState(false)
-  const winsize = useWindowSize()
   const color = useRecoilValue(themeColorState)
   const setNotifier = useSetRecoilState(notifierState)
 
   const onDelete = useCallback(async (p: Post) => {
     if (!p) return
     const res = await apiClient.v1.post.id.delete({ body: p.id })
-    console.log(res)
     setNotifier({
       state: 'success',
       message: {
@@ -44,7 +41,7 @@ export const Page = () => {
       }
     })
     if (res.body.status === 'success') {
-      router.push('/post')
+      router.replace('/post')
     }
   }, [])
 
@@ -108,22 +105,22 @@ export const Page = () => {
 
   return (
     <>
-      <Wrap opacity={wrapStyle.opacity}>
+      <FlexBox 
+        way={'column'}
+        width={'100vw'}
+        height={'100vh'}
+        overflow={{x: 'hidden', y: 'hidden'}}
+      >
         <PostEditHeader
           post={post}
+          size={HEADER_SIZE}
           onSave={async () => { onSave(post) }}
           onDelete={() => setDeleteModalVisible(true)}
-          onRender={(elm) => {
-            const rect = elm.getBoundingClientRect()
-            setEditorHeight(`${winsize.height - rect.height * 0.9}px`)
-            setWrapStyle({
-              // marginTop: `-${rect.height}px`,
-              opacity: 1
-            })
-          }}
         />
-        <PostEdit post={post} height={editorHeight} />
-      </Wrap>
+        <FlexBox way={'column'} width={'100%'} grow={'1'}>
+          <PostEdit post={post} height={`calc(100vh - ${HEADER_SIZE.height})`} />
+        </FlexBox>
+      </FlexBox>
       <MessageModal
         type={'caution'}
         message={`この投稿を削除してもよろしいですか？\n削除された投稿は復元することができません。`}
@@ -146,12 +143,5 @@ export const Page = () => {
     </>
   )
 }
-
-const Wrap = styled.div<{ opacity: number }>`
-  width: 100vw;
-  overflow: hidden;
-  opacity: ${(props) => props.opacity};
-  transition: 0.5s;
-`
 
 export default Page

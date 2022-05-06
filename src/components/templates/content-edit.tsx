@@ -8,7 +8,7 @@ import {
   editItemParamState,
   themeColorState
 } from '~/states/atoms'
-import { Sidebar } from '../layout/sidebar'
+import { Sidebar } from '../elements/sidebar'
 import { moduler } from '~/utils/styles'
 import { ContentEditBasic } from '../organisms/content-edit-basic'
 import { ContentEditCategory } from '../organisms/content-edit-category'
@@ -53,7 +53,7 @@ export const ContentEdit = (props: {
         onCreateItemParam={props.onCreateItemParam}
         onDeleteItemParam={props.onDeleteItemParam}
       />
-      <Sidebar sideWidth="30ch" gap={moduler(6)}>
+      <Sidebar sidePosition={'left'} sideWidth="30ch" gap={moduler(6)}>
         <ContentEditNav router={props.router} />
         <FitScreenBox
           borderTop={{

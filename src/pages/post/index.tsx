@@ -4,7 +4,7 @@ import { useCallback, useEffect } from 'react'
 import { randomStr } from '~/utils/variable'
 import { PostHome } from '~/components/templates/post-home'
 import { Content } from '@prisma/client'
-import { AnimateFadeVisibleBox } from '~/components/animation/animate-fade-visible-box'
+import { FadeBox } from '~/components/atoms/box/fade'
 import { useSetRecoilState } from 'recoil'
 import { notifierState } from '~/states/atoms'
 import { useRouter } from 'next/router'
@@ -68,8 +68,8 @@ const Page = () => {
 
   return (
     <>
-      <AnimateFadeVisibleBox
-        isVisible={!!posts && !!contents && !!categories}
+      <FadeBox
+        status={!!posts && !!contents && !!categories}
         translation={{ from: 'bottom', quantity: '10px', duration: '0.5s' }}
       >
         {!!posts && !!contents && !!categories && (
@@ -82,7 +82,7 @@ const Page = () => {
             ></PostHome>
           </>
         )}
-      </AnimateFadeVisibleBox>
+      </FadeBox>
     </>
   )
 }

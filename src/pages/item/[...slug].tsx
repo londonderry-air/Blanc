@@ -4,7 +4,7 @@ import useAspidaSWR from '@aspida/swr'
 import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { AnimateFadeVisibleBox } from '~/components/animation/animate-fade-visible-box'
+import { FadeBox } from '~/components/atoms/box/fade'
 import { Box } from '~/components/atoms/box/box'
 import { MessageModal } from '~/components/molucules/modal'
 import { ItemEdit } from '~/components/templates/item-edit'
@@ -72,8 +72,8 @@ export const Page = () => {
 
   return (
     <Box width={'100%'}>
-      <AnimateFadeVisibleBox
-        isVisible={!!editItem && isTargetCollect(editItem)}
+      <FadeBox
+        status={!!editItem && isTargetCollect(editItem)}
         translation={{ from: 'bottom', quantity: '10px', duration: '0.5s' }}
       >
         <ItemEdit
@@ -81,7 +81,7 @@ export const Page = () => {
           onSaveItem={() => onSave()}
           onDeleteItem={() => setDeleteModalVisible(true)}
         />
-      </AnimateFadeVisibleBox>
+      </FadeBox>
       <MessageModal
         type={'caution'}
         message={`このアイテムを削除してもよろしいですか？\n削除されたアイテムは復元することができません。`}

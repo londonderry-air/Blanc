@@ -25,12 +25,8 @@ export const createItem = async (contentId: Content['id']) => {
       content: { connect: { id: contentId } }
     }
   })
-  console.log(content)
-  console.log(newItem)
   if (content?.isAutoPostCreateWithItem) {
-    console.log(
-      await createPost('新しい投稿', randomStr(), contentId, newItem.id)
-    )
+    await createPost('新しい投稿', randomStr(), contentId, newItem.id)
   }
   return newItem
 }

@@ -3,7 +3,7 @@ import GoogleProvider from 'next-auth/providers/google'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { PrismaClient } from '@prisma/client'
 import { apiClient } from '~/utils/apiClient'
-import { DEFAULT_IMAGE } from '~/utils/variable'
+import { DEFAULT_IMAGE, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, NEXTAUTH_SECRET } from '~/utils/variable'
 import { signOut } from 'next-auth/react'
 
 const prisma = new PrismaClient()
@@ -12,11 +12,11 @@ export default NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
-      clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ?? '',
-      clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET ?? ''
+      clientId: GOOGLE_CLIENT_ID,
+      clientSecret: GOOGLE_CLIENT_SECRET
     })
   ],
-  secret: process.env.NEXT_PUBLIC_SECRET ?? 'secret',
+  secret: NEXTAUTH_SECRET ,
   callbacks: {
     async signIn({ user }) {
       const { body: userCount } = await apiClient.v1.admin.user.count.get()

@@ -1,7 +1,7 @@
 import {
   deletePost,
   getPost,
-  isValidPost,
+  validatePost,
   updatePost
 } from '$/service/admin/post'
 import { Prisma } from '@prisma/client'
@@ -15,7 +15,7 @@ export default defineController(() => ({
         return { status: 400, body: { status: 'failed' } }
       }
 
-      const isValid = await isValidPost(body)
+      const isValid = await validatePost(body)
 
       console.log(isValid)
 

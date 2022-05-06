@@ -6,6 +6,7 @@ import {
   deleteBlancFile,
   getBlancFile
 } from '$/service/admin/blancfile'
+import { GCP_PROJECT_ID, GCP_CLIENT_EMAIL, GCP_PRIVATE_KEY, GCP_BUCKETNAME } from '$/service/envValues'
 
 export default defineController(() => ({
   get: async ({ query }) => {
@@ -13,15 +14,14 @@ export default defineController(() => ({
   },
   post: async ({ body }) => {
     try {
-      if (!process.env.GCP_BUCKETNAME) return { status: 400, body: '' }
       const storage = new Storage({
-        projectId: process.env.GCP_PROJECT_ID,
+        projectId: GCP_PROJECT_ID,
         credentials: {
-          client_email: process.env.GCP_CLIENT_EMAIL,
-          private_key: process.env.GCP_PRIVATE_KEY ? process.env.GCP_PRIVATE_KEY.replace(/\\n/g, '\n') : ''
+          client_email: GCP_CLIENT_EMAIL,
+          private_key: GCP_PRIVATE_KEY
         }
       })
-      const bucket = storage.bucket(process.env.GCP_BUCKETNAME)
+      const bucket = storage.bucket(GCP_BUCKETNAME)
       const filename = `${randomUUID()}.${body.file.filename.split('.').pop()}`
       const file = bucket.file(filename)
       const content = await body.file.toBuffer()

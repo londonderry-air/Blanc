@@ -17,7 +17,7 @@ export const PostEditSide = (props: {
 }) => {
   const [nav, setNav] = useState<PostEditSideNavType>('settings')
   return (
-    <FlexBox way={'column'}>
+    <FlexBox way={'column'} height={'100%'}>
       <AnimateSwitchOverBox
         childKey={nav}
         width={'100%'}

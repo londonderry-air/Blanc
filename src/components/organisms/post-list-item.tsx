@@ -1,4 +1,4 @@
-import { Post, Content, Category, Item, BlancFile } from '@prisma/client'
+import { Content, Category, Item, BlancFile } from '@prisma/client'
 import { Cluster } from '../layout/cluster'
 import { _LargeH, _Word } from '../atoms/text/_text'
 import { FlexBox } from '../atoms/box/flex'
@@ -9,14 +9,14 @@ import { LabelText, LabelTextList } from '../atoms/text/label'
 import { Box } from '../atoms/box/box'
 import { StackText } from '../atoms/text/stack'
 import { PublishCell } from '../atoms/cell/publish'
-import { AnimateHoverBorderBox } from '../animation/animate-hover-border-box'
-import { PublishStatus } from '$/types/status'
+import { HoverBorderBox } from '../atoms/box/border'
 import { Link } from '../atoms/link/Link'
 import { BorderBox } from '../atoms/box/border'
 import { DateText } from '../atoms/text/date'
 import { Image } from '../atoms/image/image'
 import { PostWithRelation } from '$/types/post'
-import { HoverFadeBox } from '../animation/aniamte-hover-fade-box'
+import { HoverFadeBox } from '../atoms/box/fade'
+import { getPublishState } from '~/utils/status'
 
 export const PostListItem = (props: PostListItemProps) => {
   const post = props.post
@@ -24,10 +24,10 @@ export const PostListItem = (props: PostListItemProps) => {
   return (
     <Link href={`/post/edit/${post.id}`} width={'100%'}>
       <Box width={'100%'}>
-        <AnimateHoverBorderBox
+        <HoverBorderBox
           padding={`${moduler(0)} ${moduler(1)} ${moduler(0)} ${moduler(1)}`}
-          unhoverWidth={'0em'}
-          hoverWidth={'0.5em'}
+          unhover={{width: '0em'}}
+          hover={{width: '0.5em'}}
           color={color.text}
         >
           <Cluster justifyContent="space-between" alignItem="center">
@@ -135,7 +135,7 @@ export const PostListItem = (props: PostListItemProps) => {
               </Cluster>
             </Box>
           </Cluster>
-        </AnimateHoverBorderBox>
+        </HoverBorderBox>
       </Box>
     </Link>
   )
@@ -169,27 +169,6 @@ const ItemInfo = (props: { item: Item & { thumbnail: BlancFile | null; } }) => (
     </HoverFadeBox>
   </Link>
 )
-
-const getPublishState = (p: Post): PublishStatus => {
-  const now = new Date()
-  const from = new Date(p.from)
-  const to = p.to ? new Date(p.to) : null
-  if (to) {
-    if (p.publish && from < now && to > now) {
-      return 'publish'
-    }
-    if (p.publish && to < now) {
-      return 'expired'
-    }
-  }
-  if (p.publish && from < now) {
-    return 'publish'
-  }
-  if (p.publish && from > now) {
-    return 'comingsoon'
-  }
-  return 'draft'
-}
 
 type PostListItemProps = {
   post: PostWithRelation

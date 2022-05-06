@@ -43,13 +43,13 @@ export const Box = styled.div<{
   ${(props) =>
     props.overflow
       ? props.overflow.x
-        ? `overflow-x: ${props.overflow.x}`
+        ? `overflow-x: ${props.overflow.x};`
         : ''
       : ''}
   ${(props) =>
     props.overflow
       ? props.overflow.y
-        ? `overflow-y: ${props.overflow.y}`
+        ? `overflow-y: ${props.overflow.y};`
         : ''
       : ''}
 `

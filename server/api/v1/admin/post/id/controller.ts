@@ -1,7 +1,7 @@
 import {
   deletePost,
   getEditPost,
-  isValidPost,
+  validatePost,
   updatePost
 } from '$/service/admin/post'
 import { defineController } from './$relay'
@@ -17,7 +17,7 @@ export default defineController(() => ({
         return { status: 400, body: { status: 'failed' } }
       }
 
-      const isValid = await isValidPost(body)
+      const isValid = await validatePost(body)
 
       console.log(isValid)
 

@@ -1,4 +1,4 @@
-import { BlancFile, Content, Item } from '@prisma/client'
+import { Content } from '@prisma/client'
 import { useEffect, useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { modalState, themeColorState } from '~/states/atoms'
@@ -8,16 +8,16 @@ import { HomeHeader } from '../molucules/home-header'
 import { ItemFilter } from '../organisms/item-filter'
 import { ModalContentSelect } from '../organisms/modal-content-select'
 import { ButtonProps } from '$/types/element'
+import { ItemWithThumbnail } from '$/types/item'
 
 export const ItemHome = (props: {
-  items: (Item & {
-    thumbnail: BlancFile | null
-  })[]
+  items: ItemWithThumbnail[]
   contents: Content[]
   onCreate: (c: Content) => void
 }) => {
   const color = useRecoilValue(themeColorState)
   const [modal, setModal] = useRecoilState(modalState)
+  const [filtered, setFilteredItems] = useState<ItemWithThumbnail[]>(props.items)
   const [content, setContent] = useState<Content | null>(null)
   const [isFilterOpen, setFilterOpen] = useState(false)
   const getModalButton = (isActive: boolean): ButtonProps[] => [
@@ -102,11 +102,11 @@ export const ItemHome = (props: {
           isFilterOpen={isFilterOpen}
           items={props.items}
           contents={props.contents}
-          onFiltered={(items: Item[]) => console.log(items)}
+          onFiltered={(items: ItemWithThumbnail[]) => setFilteredItems(items)}
           onFilterOpen={(b) => setFilterOpen(b)}
         />
         <ItemList
-          items={props.items}
+          items={filtered}
           contents={props.contents}
           isFilterOpen={isFilterOpen}
         />

@@ -40,7 +40,7 @@ export const updateContent = (
     }
   })
 
-export const isValidContent = async (
+export const validateContent = async (
   content: Content
 ): Promise<DBValidationResult> => {
   const allContents = await prisma.content.findMany()

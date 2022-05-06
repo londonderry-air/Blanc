@@ -153,7 +153,7 @@ export const _SelectList = styled.div<{
   pointer-events: ${(props) => (props.isOpen ? 'all' : 'none')};
   border: solid 1px ${(props) => props.border};
 
-  z-index: 1;
+  z-index: 2;
 `
 
 export const _SelectListItem = styled.div<{

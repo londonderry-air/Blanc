@@ -1,4 +1,4 @@
-import { AnimateHoverBorderBox } from '../animation/animate-hover-border-box'
+import { HoverBorderBox } from '../atoms/box/border'
 import { useRecoilValue } from 'recoil'
 import { themeColorState } from '~/states/atoms'
 import { StackText } from '../atoms/text/stack'
@@ -15,10 +15,14 @@ export const EditNavItem = (props: {
   const color = useRecoilValue(themeColorState)
   return (
     <Link href={props.href}>
-      <AnimateHoverBorderBox
+      <HoverBorderBox
         padding={'0.5em 1em'}
-        unhoverWidth={props.isDisplay ? '100%' : '0.25em'}
-        hoverWidth={props.isDisplay ? '100%' : '0.5em'}
+        unhover={{
+          width: props.isDisplay ? '100%' : '0.25em'
+        }}
+        hover = {{
+          width: props.isDisplay ? '100%' : '0.5em'
+        }}
         color={color.border}
       >
         <Box width="fit-content">
@@ -29,7 +33,7 @@ export const EditNavItem = (props: {
             isCenter={false}
           />
         </Box>
-      </AnimateHoverBorderBox>
+      </HoverBorderBox>
     </Link>
   )
 }

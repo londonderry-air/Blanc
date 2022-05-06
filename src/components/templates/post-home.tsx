@@ -12,6 +12,7 @@ import { PostWithRelation } from '$/types/post'
 
 export const PostHome = (props: PostTopProps) => {
   const color = useRecoilValue(themeColorState)
+  const [posts, setPosts] = useState<PostWithRelation[]>(props.posts)
   const [content, setContent] = useState<Content | null>(null)
   const [isFilterOpen, setFilterOpen] = useState(false)
   const [modal, setModal] = useRecoilState(modalState)
@@ -92,18 +93,14 @@ export const PostHome = (props: PostTopProps) => {
       />
       <PostFilter
         isFilterOpen={isFilterOpen}
+        posts={props.posts}
         contents={props.contents}
         categories={props.categories}
-        onSearchInput={(kw) => console.log(kw)}
-        onPublishStateChange={(ps, state) => {
-          console.log(`PublishState: ${ps}, State: ${state}`)
-        }}
-        onContentChange={(c) => console.log(c)}
-        onCategoryChange={(c) => console.log(c)}
         onFilterOpen={(b) => setFilterOpen(b)}
+        onFilter={(posts) => setPosts(posts)}
       ></PostFilter>
       <PostList
-        posts={props.posts}
+        posts={posts}
         contents={props.contents}
         categories={props.categories}
         isFilterOpen={isFilterOpen}

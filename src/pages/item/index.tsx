@@ -5,7 +5,7 @@ import { ItemHome } from '~/components/templates/item-home'
 import { Content } from '@prisma/client'
 import { useResetRecoilState } from 'recoil'
 import { editItemState } from '~/states/atoms'
-import { AnimateFadeVisibleBox } from '~/components/animation/animate-fade-visible-box'
+import { FadeBox } from '~/components/atoms/box/fade'
 import { Box } from '~/components/atoms/box/box'
 
 const Page = () => {
@@ -23,8 +23,8 @@ const Page = () => {
 
   return (
     <Box width={'100%'}>
-      <AnimateFadeVisibleBox
-        isVisible={!!contents && !!items}
+      <FadeBox
+        status={!!contents && !!items}
         translation={{ from: 'bottom', quantity: '10px', duration: '0.5s' }}
       >
         {items && contents && (
@@ -34,7 +34,7 @@ const Page = () => {
             onCreate={(c) => createItem(c)}
           />
         )}
-      </AnimateFadeVisibleBox>
+      </FadeBox>
     </Box>
   )
 }

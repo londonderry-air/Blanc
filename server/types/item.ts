@@ -19,6 +19,10 @@ export type ItemWithRelation = Item & {
     | null
 }
 
+export type ItemWithThumbnail = Item & {
+  thumbnail: BlancFile | null
+}
+
 export type ClientItem = Omit<Item, 'contentId' | 'thumbnailId' | 'public'> & {
   thumbnail: ClientBlancFile | null
 }

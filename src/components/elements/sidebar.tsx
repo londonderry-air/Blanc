@@ -1,7 +1,7 @@
-import React from 'react'
 import styled from 'styled-components'
+import { Box } from '../atoms/box/box'
 
-const Wrap = styled.div<{
+export const Sidebar = styled(Box)<{
   gap?: string
   sideWidth: string
   sidePosition: 'right' | 'left'
@@ -26,23 +26,3 @@ const Wrap = styled.div<{
     height: 100%;
   }
 `
-
-export const Sidebar = (props: SidebarProps) => {
-  const children = props.children
-  const gap = props.gap
-  const sideWidth = props.sideWidth
-  const sidePosition = props.sidePosition ?? 'left'
-
-  return (
-    <Wrap gap={gap} sideWidth={sideWidth} sidePosition={sidePosition}>
-      {children}
-    </Wrap>
-  )
-}
-
-type SidebarProps = {
-  children: React.ReactNode
-  gap?: string
-  sideWidth: string
-  sidePosition?: 'right' | 'left'
-}

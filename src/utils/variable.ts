@@ -53,3 +53,6 @@ export const theme = {
 
 export const randomStr = () => Math.random().toString(36).slice(-8)
 export const DEFAULT_IMAGE = '/blanc.png'
+export const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ?? ''
+export const GOOGLE_CLIENT_SECRET = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET ?? ''
+export const NEXTAUTH_SECRET = process.env.NEXT_PUBLIC_SECRET ?? 'secret'

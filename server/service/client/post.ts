@@ -13,11 +13,9 @@ export const getAllPostWithContent = async (
       slug: contentSlug
     }
   })
-
   if (!content) {
     return []
   }
-
   return await findPublishPosts(content)
 }
 

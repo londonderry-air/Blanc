@@ -2,6 +2,7 @@ import { useRecoilValue } from 'recoil'
 import { localeState, themeColorState } from '~/states/atoms'
 import { PublishStatus, StatusText } from '$/types/status'
 import { getLocalWord } from './locale'
+import { Post } from '$/node_modules/@prisma/client'
 
 export const getPublishStateText = (state: PublishStatus): StatusText => {
   const locale = useRecoilValue(localeState)
@@ -57,4 +58,25 @@ export const getPublishStateColor = (state: PublishStatus) => {
         text: color.cellText
       }
   }
+}
+
+export const getPublishState = (p: Post): PublishStatus => {
+  const now = new Date()
+  const from = new Date(p.from)
+  const to = p.to ? new Date(p.to) : null
+  if (to) {
+    if (p.publish && from < now && to > now) {
+      return 'publish'
+    }
+    if (p.publish && to < now) {
+      return 'expired'
+    }
+  }
+  if (p.publish && from < now) {
+    return 'publish'
+  }
+  if (p.publish && from > now) {
+    return 'comingsoon'
+  }
+  return 'draft'
 }
